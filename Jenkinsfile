@@ -27,7 +27,7 @@ pipeline {
       }
     }
 
-    stage('Check git branch') {
+    stage('Merge git branch') {
       steps {
         sh '''ls -al
 cd my-charts
@@ -36,7 +36,7 @@ git branch -a
 git checkout -b dev origin/branch-test
 git branch
 git checkout master
-git merge --no-ff dev -m "Merge branch \'dev\'"
+git merge --no-ff dev -m \'Merge branch dev\'
 git push origin master'''
       }
     }
