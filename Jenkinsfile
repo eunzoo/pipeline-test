@@ -36,7 +36,7 @@ git branch -a
 git checkout -b dev origin/merge-test-2
 git branch -a
 git checkout master
-git merge --no-ff dev
+git merge dev
 git push origin master
 '''
       }
