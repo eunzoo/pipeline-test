@@ -22,14 +22,7 @@ pipeline {
       steps {
         withVault(configuration: [vaultUrl: 'https://dodt-vault.acldevsre.de',  vaultCredentialId: 'approle-for-vault', engineVersion: 2], vaultSecrets: [[path: 'jenkins/eunzoo-public-github', secretValues: [[envVar: 'GITHUB_TOKEN', vaultKey: 'token']]]]) {
           sh "git clone https://${env.GITHUB_TOKEN}@github.com/eunzoo/my-charts.git"
-        }
-
-      }
-    }
-
-    stage('Merge git branch') {
-      steps {
-        sh '''ls -al
+          sh '''ls -al
 cd my-charts
 git branch -a
 
@@ -38,6 +31,8 @@ git branch
 git checkout master
 git merge --no-ff dev
 git push origin master'''
+        }
+
       }
     }
 
