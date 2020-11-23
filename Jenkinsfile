@@ -35,8 +35,8 @@ git branch -a
 
 git checkout -b dev origin/branch-test
 git branch
-git merge master
 git checkout master
+git merge --no-ff dev -m "Merge branch \'dev\'"
 git push origin master'''
       }
     }
