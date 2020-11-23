@@ -29,7 +29,16 @@ pipeline {
 
     stage('Git merge') {
       steps {
-        gitAutomerger(checkoutFromRemote: true, detailConflictReport: true, logLevel: 'INFO', remoteName: 'origin/merge-test-2')
+        sh '''ls -al
+cd my-charts
+git branch -a
+
+git checkout -b dev origin/merge-test-2
+git branch -a
+git checkout master
+git merge --no-ff dev
+git push origin master
+'''
       }
     }
 
