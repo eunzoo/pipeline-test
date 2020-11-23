@@ -18,5 +18,11 @@ pipeline {
       }
     }
 
+    stage('Git') {
+      steps {
+        git 'https://github.com/eunzoo/my-charts.git'
+      }
+    }
+
   }
 }
