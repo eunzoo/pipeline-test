@@ -33,9 +33,10 @@ pipeline {
 cd my-charts
 git branch -a
 
-git checkout -t origin/branch-test
+git checkout -b dev origin/branch-test
 git branch
 git merge master
+git checkout master
 git push origin master'''
       }
     }
