@@ -27,17 +27,9 @@ pipeline {
       }
     }
 
-    stage('Git merge branch') {
+    stage('Git merge') {
       steps {
-        sh '''ls -al
-cd my-charts
-git branch -a
-
-git checkout -b dev origin/merge-test-1
-git branch -a
-git checkout master
-git merge --no-ff dev -m \\\'Merge branch dev\\\'
-git push origin master'''
+        gitAutomerger(checkoutFromRemote: true, detailConflictReport: true, logLevel: 'INFO', remoteName: 'origin/merge-test-2')
       }
     }
 
