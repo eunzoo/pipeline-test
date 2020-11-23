@@ -32,7 +32,11 @@ pipeline {
         sh '''ls -al
 cd my-charts
 git branch -a
-'''
+
+git checkout -t origin/branch-test
+git branch
+git merge master
+git push origin master'''
       }
     }
 
