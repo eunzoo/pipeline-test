@@ -34,9 +34,10 @@ cd my-charts
 git branch -a
 
 git checkout -b dev origin/branch-test
-git branch
+git branch -a
+ls -al
 git checkout master
-git merge --no-ff dev -m \\"Merge branch dev\\"
+git merge --no-ff dev
 git push origin master'''
       }
     }
