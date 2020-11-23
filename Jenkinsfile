@@ -21,9 +21,17 @@ pipeline {
     stage('Check Vault Crednetial & Git Merge') {
       steps {
         withVault(configuration: [vaultUrl: 'https://dodt-vault.acldevsre.de',  vaultCredentialId: 'approle-for-vault', engineVersion: 2], vaultSecrets: [[path: 'jenkins/eunzoo-public-github', secretValues: [[envVar: 'GITHUB_TOKEN', vaultKey: 'token']]]]) {
-          sh "echo ${env.GITHUB_TOKEN}"
+          sh "git clone -b dev https://${env.GITHUB_TOKEN}@github.com/eunzoo/my-charts.git"
         }
 
+      }
+    }
+
+    stage('Check git branch') {
+      steps {
+        sh '''ls -al
+git branch
+'''
       }
     }
 
