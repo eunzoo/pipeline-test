@@ -31,7 +31,7 @@ pipeline {
       steps {
         sh '''ls -al
 cd my-charts
-git branch
+git branch -a
 '''
       }
     }
