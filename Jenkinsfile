@@ -53,7 +53,7 @@ git branch -a
 
         stage('JQL Test') {
           steps {
-            jiraSearch 'project = "First Things First"'
+            jiraSearch 'project = "EMMA"'
           }
         }
 
