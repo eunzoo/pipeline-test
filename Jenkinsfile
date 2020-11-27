@@ -33,12 +33,19 @@ pipeline {
 cd my-charts
 git branch -a
 
-git checkout -b dev origin/merge-test-2
-git branch -a
-git checkout master
-git merge dev
-git push origin master
+#git checkout -b dev origin/merge-test-2
+#git branch -a
+#git checkout master
+#git merge dev
+#git push origin master
+
 '''
+      }
+    }
+
+    stage('Add a Jira Comment') {
+      steps {
+        jiraComment(issueKey: 'EMMA-15', body: 'Nov. 27, Friday : This is a pipeline test comment.')
       }
     }
 
