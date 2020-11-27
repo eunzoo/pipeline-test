@@ -44,8 +44,19 @@ git branch -a
     }
 
     stage('Add a Jira Comment') {
-      steps {
-        jiraComment(issueKey: 'EMMA-15', body: 'Nov. 27, Friday : This is a pipeline test comment.')
+      parallel {
+        stage('Add a Jira Comment') {
+          steps {
+            jiraComment(issueKey: 'EMMA-15', body: 'Nov. 27, Friday : This is a pipeline test comment.')
+          }
+        }
+
+        stage('JQL Test') {
+          steps {
+            jiraSearch 'project = "First Things First"'
+          }
+        }
+
       }
     }
 
