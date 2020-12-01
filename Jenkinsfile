@@ -6,12 +6,6 @@ pipeline {
 
   }
   stages {
-    stage('Request an approval') {
-      steps {
-        input(message: 'Request an approval for sending a message', submitter: 'jmungmoong.roh')
-      }
-    }
-
     stage('Check Vault Crednetial & Git Merge') {
       steps {
         withVault(configuration: [vaultUrl: 'https://dodt-vault.acldevsre.de',  vaultCredentialId: 'approle-for-vault', engineVersion: 2], vaultSecrets: [[path: 'jenkins/eunzoo-public-github', secretValues: [[envVar: 'GITHUB_TOKEN', vaultKey: 'token']]]]) {
@@ -60,9 +54,9 @@ git branch -a
         stage('Issue Selector') {
           steps {
             step([$class: 'hudson.plugins.jira.JiraIssueUpdater', 
-                                   issueSelector: [$class: 'hudson.plugins.jira.selector.DefaultIssueSelector'], 
-                                   scm: [$class: 'GitSCM', branches: [[name: '*/master']], 
-                                   userRemoteConfigs: [[url: 'https://github.com/eunzoo/my-charts.git']]]])
+                                               issueSelector: [$class: 'hudson.plugins.jira.selector.DefaultIssueSelector'], 
+                                               scm: [$class: 'GitSCM', branches: [[name: '*/master']], 
+                                               userRemoteConfigs: [[url: 'https://github.com/eunzoo/my-charts.git']]]])
           }
         }
 
