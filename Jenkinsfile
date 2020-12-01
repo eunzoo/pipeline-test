@@ -47,7 +47,7 @@ git branch -a
 
         stage('JQL Test') {
           steps {
-            jiraSearch 'projectKey = "EMMA"'
+            jiraSearch 'jiraProjectKey = "EMMA"'
           }
         }
 
