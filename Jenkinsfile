@@ -12,18 +12,18 @@ pipeline {
       }
     }
 
-    stage('Send a message') {
-      steps {
-        mattermostSend(endpoint: 'https://mattermost.acldevsre.de/hooks/e3ry938dj7gw98u9u6ecg6seoy', icon: 'https://www.jenkins.io/images/logos/automotive/256.png', message: 'Nov. 27, Friday \'20', text: 'This is a test message.')
-      }
-    }
-
     stage('Check Vault Crednetial & Git Merge') {
       steps {
-        withVault(configuration: [vaultUrl: 'https://dodt-vault.acldevsre.de',  vaultCredentialId: 'approle-for-vault', engineVersion: 2], vaultSecrets: [[path: 'jenkins/eunzoo-public-github', secretValues: [[envVar: 'GITHUB_TOKEN', vaultKey: 'token']]]]) {
+        withVault(configuration: [vaultUrl: 'https://dodt-vault.acldevsre.de',  vaultCredentialId: 'approle-for-vault', engineVersion: 2], vaultSecrets: [[path: 'jenkins/eunzoo-public-github', secretValues: [[envVar: 'GITHUB_TOKEN', vaultKey: 'token'], [envVar: 'MATTERMOST_URL', vaultKey: 'url']]]]) {
           sh "git clone https://${env.GITHUB_TOKEN}@github.com/eunzoo/my-charts.git"
         }
 
+      }
+    }
+
+    stage('Send a message') {
+      steps {
+        mattermostSend(endpoint: '${env.MATTERMOST_URL}', icon: 'https://www.jenkins.io/images/logos/automotive/256.png', message: 'Dec. 1, Tuesday \'20', text: 'This is a test message.')
       }
     }
 
@@ -47,7 +47,7 @@ git branch -a
       parallel {
         stage('Add a Jira Comment') {
           steps {
-            jiraComment(issueKey: 'EMMA-15', body: 'Nov. 27, Friday : This is a pipeline test comment.')
+            jiraComment(issueKey: 'EMMA-15', body: 'Dec. 1, Tuesday : This is a pipeline test comment.')
           }
         }
 
