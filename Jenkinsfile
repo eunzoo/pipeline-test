@@ -15,8 +15,9 @@ pipeline {
     stage('Check Vault Crednetial & Git Merge') {
       steps {
         withVault(configuration: [vaultUrl: 'https://dodt-vault.acldevsre.de',  vaultCredentialId: 'approle-for-vault', engineVersion: 2], vaultSecrets: [[path: 'jenkins/eunzoo-public-github', secretValues: [[envVar: 'GITHUB_TOKEN', vaultKey: 'token']]], 
-        						   [path: 'jenkins/mattermost-incoming-webhook', secretValues: [[envVar: 'MATTERMOST_URL', vaultKey: 'url']]]]) {
+                        						   [path: 'jenkins/mattermost-incoming-webhook', secretValues: [[envVar: 'MATTERMOST_URL', vaultKey: 'url']]]]) {
           sh "git clone https://${env.GITHUB_TOKEN}@github.com/eunzoo/my-charts.git"
+          sh "echo ${env.MATTERMOST_URL}"
         }
 
       }
