@@ -14,11 +14,8 @@ pipeline {
 
     stage('Check Vault Crednetial & Git Merge') {
       steps {
-        withVault(configuration: [vaultUrl: 'https://dodt-vault.acldevsre.de',  vaultCredentialId: 'approle-for-vault', engineVersion: 2], vaultSecrets: [[path: 'jenkins/eunzoo-public-github', secretValues: [[envVar: 'GITHUB_TOKEN', vaultKey: 'token']]], 
-                                        						   [path: 'jenkins/mattermost-incoming-webhook', secretValues: [[envVar: 'MATTERMOST_URL', vaultKey: 'url']]]]) {
+        withVault(configuration: [vaultUrl: 'https://dodt-vault.acldevsre.de',  vaultCredentialId: 'approle-for-vault', engineVersion: 2], vaultSecrets: [[path: 'jenkins/eunzoo-public-github', secretValues: [[envVar: 'GITHUB_TOKEN', vaultKey: 'token']]]]) {
           sh "git clone https://${env.GITHUB_TOKEN}@github.com/eunzoo/my-charts.git"
-          sh "echo ${env.MATTERMOST_URL}"
-          mattermostSend(endpoint: '${env.MATTERMOST_URL}', icon: 'https://www.jenkins.io/images/logos/automotive/256.png', message: 'Dec. 1, Tuesday \'20', text: 'This is a test message.')
         }
 
       }
@@ -26,7 +23,7 @@ pipeline {
 
     stage('Send a message') {
       steps {
-        mattermostSend(endpoint: '${env.MATTERMOST_URL}', icon: 'https://www.jenkins.io/images/logos/automotive/256.png', message: 'Dec. 1, Tuesday \'20', text: 'This is a test message.')
+        mattermostSend(endpoint: 'https://mattermost.acldevsre.de/hooks/e3ry938dj7gw98u9u6ecg6seoy', icon: 'https://www.jenkins.io/images/logos/automotive/256.png', message: 'Dec. 1, Tuesday \'20', text: 'This is a test message.')
       }
     }
 
@@ -57,6 +54,15 @@ git branch -a
         stage('JQL Test') {
           steps {
             jiraSearch 'project = "EMMA"'
+          }
+        }
+
+        stage('Issue Selector') {
+          steps {
+            step([$class: 'hudson.plugins.jira.JiraIssueUpdater', 
+                                   issueSelector: [$class: 'hudson.plugins.jira.selector.DefaultIssueSelector'], 
+                                   scm: [$class: 'GitSCM', branches: [[name: '*/master']], 
+                                   userRemoteConfigs: [[url: 'https://github.com/eunzoo/my-charts.git']]]])
           }
         }
 
