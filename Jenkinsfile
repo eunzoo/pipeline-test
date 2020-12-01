@@ -51,15 +51,6 @@ git branch -a
           }
         }
 
-        stage('Issue Selector') {
-          steps {
-            step([$class: 'hudson.plugins.jira.JiraIssueUpdater', 
-                                               issueSelector: [$class: 'hudson.plugins.jira.selector.DefaultIssueSelector'], 
-                                               scm: [$class: 'GitSCM', branches: [[name: '*/master']], 
-                                               userRemoteConfigs: [[url: 'https://github.com/eunzoo/my-charts.git']]]])
-          }
-        }
-
       }
     }
 
