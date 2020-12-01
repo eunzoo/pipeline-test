@@ -48,6 +48,7 @@ git branch -a
         stage('JQL Test') {
           steps {
             jiraSearch 'issue=EMMA-16'
+            sh 'echo issue.data.toString()'
           }
         }
 
