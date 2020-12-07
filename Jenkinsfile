@@ -17,7 +17,7 @@ pipeline {
 
     stage('Send a message') {
       steps {
-        mattermostSend(endpoint: 'https://mattermost.acldevsre.de/hooks/e3ry938dj7gw98u9u6ecg6seoy', icon: 'https://www.jenkins.io/images/logos/automotive/256.png', message: 'Dec. 1, Tuesday \'20', text: 'This is a test message.')
+        mattermostSend(endpoint: 'https://mattermost.acldevsre.de/hooks/1oj1jtrkwi81pe1crj3hwbyohe', icon: 'https://www.jenkins.io/images/logos/automotive/256.png', message: 'Dec. 7, Monday \'20', text: 'This is a test message.')
       }
     }
 
