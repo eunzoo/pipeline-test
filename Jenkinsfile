@@ -41,14 +41,13 @@ git branch -a
       parallel {
         stage('Add a Jira Comment') {
           steps {
-            jiraComment(issueKey: 'EMMA-16', body: 'Dec. 1, Tuesday : This is a pipeline test comment.')
+            jiraComment(issueKey: 'EMMA-16', body: 'Dec. 7, Monday : This is a pipeline test comment.')
           }
         }
 
         stage('JQL Test') {
           steps {
             jiraSearch 'issue=EMMA-16'
-            sh 'echo issue.data.toString()'
           }
         }
 
