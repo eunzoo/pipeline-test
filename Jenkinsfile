@@ -8,11 +8,11 @@ metadata:
 spec:
   containers:
   - name: test
-    image: registry.acldevsre.de/hello
+    image: registry.acldevsre.de/registry/hello
     imagePullPolicy: Always
     tty: true
   imagePullSecrets:
-  - name: image-pull-secret
+  - name: harbor-pull-secret
 '''
     }
 
