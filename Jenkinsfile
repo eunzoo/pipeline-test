@@ -4,7 +4,7 @@ pipeline {
       yaml '''
 kind: Pod
 metadata:
-  name: prReviewTest
+  name: ImagePullTest
 spec:
   containers:
   - name: test
@@ -12,7 +12,7 @@ spec:
     imagePullPolicy: Always
     tty: true
   imagePullSecrets:
-  - name: pr-review-secret
+  - name: image-pull-secret
 '''
     }
 
