@@ -8,7 +8,7 @@ metadata:
 spec:
   containers:
   - name: test
-    image: registry.acldevsre.de/hello
+    image: registry.acldevsre.de/jisang/hello
     imagePullPolicy: Always
     tty: true
   imagePullSecrets:
