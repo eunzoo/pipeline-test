@@ -1,11 +1,32 @@
 pipeline {
   agent {
-    node {
-      label 'jenkins-jenkins-slave'
+    kubernetes {
+      yaml '''
+kind: Pod
+metadata:
+  name: prReviewTest
+spec:
+  containers:
+  - name: test
+    image: registry.acldevsre.de/hello
+    imagePullPolicy: Always
+    tty: true
+  imagePullSecrets:
+  - name: pr-review-secret
+'''
     }
 
   }
   stages {
+    stage('Image Pull Test') {
+      steps {
+        container(name: 'test') {
+          sh 'echo "Image Pull Succeeded!"'
+        }
+
+      }
+    }
+
     stage('Check Vault Crednetial & Git Merge') {
       steps {
         withVault(configuration: [vaultUrl: 'https://dodt-vault.acldevsre.de',  vaultCredentialId: 'approle-for-vault', engineVersion: 2], vaultSecrets: [[path: 'jenkins/eunzoo-public-github', secretValues: [[envVar: 'GITHUB_TOKEN', vaultKey: 'token']]]]) {
