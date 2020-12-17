@@ -38,7 +38,7 @@ spec:
 
     stage('Send a message') {
       steps {
-        mattermostSend(endpoint: 'https://mattermost.acldevsre.de/hooks/1oj1jtrkwi81pe1crj3hwbyohe', icon: 'https://www.jenkins.io/images/logos/automotive/256.png', message: 'Dec. 7, Monday \'20', text: 'This is a test message.')
+        mattermostSend(endpoint: 'https://mattermost.acldevsre.de/hooks/1oj1jtrkwi81pe1crj3hwbyohe', icon: 'https://www.jenkins.io/images/logos/automotive/256.png', message: 'Dec. 17, Thursday \'20', text: 'This is a test message.')
       }
     }
 
@@ -62,7 +62,7 @@ git branch -a
       parallel {
         stage('Add a Jira Comment') {
           steps {
-            jiraComment(issueKey: 'EMMA-16', body: 'Dec. 7, Monday : This is a pipeline test comment.')
+            jiraComment(issueKey: 'EMMA-16', body: 'Dec. 17, Thursday : This is a pipeline test comment.')
           }
         }
 
