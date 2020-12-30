@@ -38,7 +38,7 @@ spec:
 
     stage('Send a message') {
       steps {
-        mattermostSend(endpoint: 'https://mattermost.acldevsre.de/hooks/1oj1jtrkwi81pe1crj3hwbyohe', icon: 'https://www.jenkins.io/images/logos/automotive/256.png', message: 'Dec. 17, Thursday \'20', text: 'This is a test message.')
+        mattermostSend(endpoint: 'https://mattermost.acldevsre.de/hooks/1oj1jtrkwi81pe1crj3hwbyohe', icon: 'https://www.jenkins.io/images/logos/automotive/256.png', message: 'Dec. 29, Wednesday \'20', text: 'This is a test message.')
       }
     }
 
@@ -62,13 +62,13 @@ git branch -a
       parallel {
         stage('Add a Jira Comment') {
           steps {
-            jiraComment(issueKey: 'EMMA-16', body: 'Dec. 17, Thursday : This is a pipeline test comment.')
+            jiraComment(issueKey: 'EMMA-18', body: 'Dec. 29, Wednesday : This is a pipeline test comment. -> From Jenkins')
           }
         }
 
-        stage('JQL Test') {
+        stage('Send Mail') {
           steps {
-            jiraSearch 'issue=EMMA-16'
+            emailext(subject: '[DoDT] mail test', from: 'noreply@acldevsre.de', to: 'eunju00.lee@samsung.com', body: 'https://code.sdsdev.co.kr/DoDT/CodeBank/pull/51/files')
           }
         }
 
