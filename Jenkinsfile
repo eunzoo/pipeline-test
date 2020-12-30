@@ -68,7 +68,7 @@ git branch -a
 
         stage('Send Mail') {
           steps {
-            emailext(subject: '[DoDT] mail test', from: 'noreply@acldevsre.de', to: 'eunju00.lee@samsung.com', body: 'https://code.sdsdev.co.kr/DoDT/CodeBank/pull/51/files')
+            emailext(subject: '[DoDT] mail test', from: 'noreply@acldevsre.de', to: 'jmungmoong.roh@samsung.com', body: 'https://code.sdsdev.co.kr/DoDT/CodeBank/pull/51/files')
           }
         }
 
